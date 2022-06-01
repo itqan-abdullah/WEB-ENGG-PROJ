@@ -1,6 +1,6 @@
 <?php 
+error_reporting(0);
 session_start();
-print_r($_SESSION);
 /////cart
 if (isset($_GET['submitcart']))
 {    
@@ -13,7 +13,7 @@ if (isset($_GET['submitcart']))
         {
             $num = array_search($_GET['src'],$sources);
             $_SESSION['cart'][$num]['quantity'] = $_SESSION['cart'][$num]['quantity'] +  $_GET['quantity'];
-            print_r( $_SESSION['cart']);
+             
             
         }
         else
@@ -22,7 +22,7 @@ if (isset($_GET['submitcart']))
             $_SESSION['cart'][$count] = array( 'title' => $_GET['title'] , 'price' => $_GET['price'],
             'quantity' => $_GET['quantity'], 'pageName' =>  $_SERVER['SCRIPT_NAME'],
             'src' => $_GET['src'] , 'id' => $_GET['id']  );
-            print_r( $_SESSION['cart']);
+             
          }
     }
     else
@@ -30,7 +30,7 @@ if (isset($_GET['submitcart']))
             $_SESSION['cart'][0] = array( 'title' => $_GET['title'] , 'price' => $_GET['price'],
             'quantity' => $_GET['quantity'], 'pageName' =>  $_SERVER['SCRIPT_NAME'],
             'src' => $_GET['src']  , 'id' => $_GET['id'] );
-            print_r( $_SESSION['cart']);
+             
     }
            
 

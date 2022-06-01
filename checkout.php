@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 if (!isset($_SESSION['cart']))
 {
     echo "Cart Empty\n";
@@ -7,7 +8,7 @@ if (!isset($_SESSION['cart']))
 }
 
 
-print_r($_SESSION);
+
 ?>
 
 <!DOCTYPE html>

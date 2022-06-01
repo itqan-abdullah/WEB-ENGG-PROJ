@@ -1,5 +1,6 @@
 
 <?php 
+error_reporting(0);
 session_start();
 $type =  $_GET['Men'];
 if (!isset($_GET['Men']))
@@ -17,39 +18,38 @@ if(!$dblink)
 $Query = "";
 if (strcmp("Men",$type) == 0)
 {
-    echo "succceeessssss";
+    
     $Query = "select * from item where category_id in (select category_id from category where type = 'Men');";
-    echo $Query.'\n';
+   
 }
 else if (strcmp("Tees",$type) == 0)
 {
-    echo "succceeessssss";
+    
     $Query = "select * from item where category_id in (select category_id from category where type = 'Men' and product_type = 'Tees');";
-    echo $Query.'\n';
+  
 }
 else if (strcmp("Jackets",$type) == 0)
 {
-    echo "succceeessssss";
+   
     $Query = "select * from item where category_id in (select category_id from category where type = 'Men' and product_type = 'Jackets');";
-    echo $Query.'\n';
+   
 }
 else if (strcmp("Trousers",$type) == 0)
 {
-    echo "succceeessssss";
+    
     $Query = "select * from item where category_id in (select category_id from category where type = 'Men' and product_type = 'Trousers');";
-    echo $Query.'\n';
+   
 }
 else if (strcmp("Hoodies",$type) == 0)
 {
-    echo "succceeessssss";
     $Query = "select * from item where category_id in (select category_id from category where type = 'Men' and product_type = 'Hoodies');";
-    echo $Query.'\n';
+    
 }
 else if (strcmp("Sweatshirts",$type) == 0)
 {
-    echo "succceeessssss";
+    
     $Query = "select * from item where category_id in (select category_id from category where type = 'Men' and product_type = 'Sweatshirts');";
-    echo $Query.'\n';
+    
 }
 
  $Query = mysqli_query($dblink,$Query);

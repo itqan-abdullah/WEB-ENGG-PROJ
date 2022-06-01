@@ -1,5 +1,6 @@
 
 <?php 
+error_reporting(0);
 session_start();
 if (isset($_GET['Kids']))
 {
@@ -19,33 +20,33 @@ if(!$dblink)
 $Query = "";
 if (strcmp("Kids",$type) == 0)
 {
-    echo "succceeessssss";
+     
     $Query = "select * from item where category_id in (select category_id from category where type = 'Kids');";
-    echo $Query.'\n';
+    
 }
 else if (strcmp("Tees",$type) == 0)
 {
-    echo "succceeessssss";
+     
     $Query = "select * from item where category_id in (select category_id from category where type = 'Kids' and product_type = 'Tees');";
-    echo $Query.'\n';
+    
 }
 else if (strcmp("Eastern",$type) == 0)
 {
-    echo "succceeessssss";
+     
     $Query = "select * from item where category_id in (select category_id from category where type = 'Kids' and product_type = 'Eastern');";
-    echo $Query.'\n';
+    
 }
 else if (strcmp("Trousers",$type) == 0)
 {
-    echo "succceeessssss";
+     
     $Query = "select * from item where category_id in (select category_id from category where type = 'Kids' and product_type = 'Trousers');";
-    echo $Query.'\n';
+    
 }
 else if (strcmp("Sweatshirts",$type) == 0)
 {
-    echo "succceeessssss";
+     
     $Query = "select * from item where category_id in (select category_id from category where type = 'Kids' and product_type = 'Sweatshits');";
-    echo $Query.'\n';
+    
 }
 
  $Query = mysqli_query($dblink,$Query);

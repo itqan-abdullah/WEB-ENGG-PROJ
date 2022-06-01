@@ -1,83 +1,13 @@
-<?php 
-session_start();
-$dblink = mysqli_connect("localhost:3307","root","","store"); 
-$pass = rand(1000,99999);
-
-$QUERY1 = "insert into customer(c_name, c_password,address,phone,postal_code) values
-('".$_GET['fname']."123',".$pass.", '".$_GET['HouseNumber']." ".$_GET['Apartment']."
-".$_GET['city']." ".$_GET['state']."', ".$_GET['phone'].",".$_GET['postalcode']."   );";
-
-$cust_add = mysqli_query($dblink,$QUERY1);
-
- 
-
-$cid = "select max(customer_id) as cid from customer;";
-$result = mysqli_query($dblink,$cid);
-$result = mysqli_fetch_assoc($result);
-$result = $result['cid'];
-
-
-$oid = "select max(order_id) as oid from c_order;";
-$result2 = mysqli_query($dblink,$oid);
-$result2 = mysqli_fetch_assoc($result2);
-$result2 = $result2['oid'] + 1;
-if ( is_null($result2))
-{
-    $result2 = 1;
-}
-
-
-
-for ($i=0; $i < count ($_SESSION['cart']) ; $i++) { 
-    $QUERY2 = "insert into c_order(order_id,item_id,quantity,customer_id,size)
-    value (".$result2.",".$_SESSION['cart'][$i]['id'].",".$_SESSION['cart'][$i]['quantity']." , ".$result.", 'M');";
-
-    $order_add = mysqli_query($dblink,$QUERY2);
-}
-
-echo "<h1>Your Password is: ".$pass."</h1>" ;
-echo "<br>";
-echo "<h1>Your username is: ".$_GET['fname']."123</h1>";
-
-
-
-
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-<style>
-        .parent{
-            background: none;
-            color: black;
-            font:inherit;
-            background-color: transparent;
-            border: none;
-            font-weight: 500;
-            font-size:120%;
-        }
-        .child{
-            background-color: transparent;
-            background: none;
-            font-weight: 200;
-            border: none;
-            padding-top:10px;
-            padding-bottom:10px;
-        }
-        .child:hover
-        {
-            color:#CC9966;
-        }
-    </style>
+
 
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Successful Purchase - The Cloth Store</title>
+    <title>Login  </title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Molla - Bootstrap eCommerce Template">
     <meta name="author" content="p-themes">
@@ -157,70 +87,53 @@ echo "<h1>Your username is: ".$_GET['fname']."123</h1>";
                         </a>
 
                         <nav class="main-nav">
-                        <ul  class="menu sf-arrows">
+                            <ul class="menu sf-arrows">
                                 <li class="megamenu-container active">
-                                    <a href="Home.php" class="sf-with-ul">Home</a>
+                                    <a href="Home.html" class="sf-with-ul">Home</a>
                                 </li>
-                                <form style = "padding-top:14px" action="Men-Category.php" method = "GET">
                                 <li>
-                                <a href=""><button class = "parent" name = "Men" value = "Men"
-                                    type = "submit" class="sf-with-ul" >Men </button></a>
+                                    <a href="Men-Category.html" class="sf-with-ul">Men</a>
 
                                     <div class="megamenu megamenu-md">
                                         <div class="menu-title">Products</div>
                                         <!-- End .menu-title -->
                                         <ul>
-                                        <li style="padding:5px;"><button class = "child" name = "Men" value = "Tees"
-                                                type = "submit" class="sf-with-ul">Tees</button></li>
-                                            <li style="padding:5px;"><button class = "child"  name = "Men" value = "Jackets"
-                                                type = "submit" class="sf-with-ul">Jackets</button></li>
-                                            <li style="padding:5px;"><button class = "child"  name = "Men" value = "Trousers"
-                                                type = "submit" class="sf-with-ul">Trousers</button></li>
-                                            <li style="padding:5px;"><button class = "child"  name = "Men" value = "Sweatshirts"
-                                                type = "submit" class="sf-with-ul">SweatShirts</button></li>
-                                                <li style="padding:5px;"><button class = "child"  name = "Men" value = "Hoodies"
-                                                type = "submit" class="sf-with-ul">Hoodies</button></li></form>
+                                            <li style="padding:5px;"><a href="Men-Tees.html">Tees</a></li>
+                                            <li style="padding:5px;"><a href="Men-Jackets.html">Jackets</a></li>
+                                            <li style="padding:5px;"><a href="Men-Trousers.html">Trousers</a></li>
+                                            <li style="padding:5px;"><a href="Men-SweatShirts.html">SweatShirts</a></li>
+                                            <li style="padding:5px;"><a href="Men-Hoodies.html">Hoodies</a></li>
                                         </ul>
                                     </div><!-- End .megamenu megamenu-md -->
                                 </li>
-                                <form style = "padding-top:14px" action="Women-Category.php" method = "GET">
+
                                 <li>
-                                    
-                                    <a href=""><button class = "parent" name = "Women" value = "Women"
-                                    type = "submit" class="sf-with-ul" >Women </button></a>
+                                    <a href="Women-Category.html" class="sf-with-ul">Women</a>
 
                                     <div class="megamenu megamenu-sm">
-                                        <div style="padding:5px;" class="menu-title">Products</div>
+                                        <div class="menu-title">Products</div>
 
                                         <ul>
-                                            <li style="padding:5px;"><button class = "child" name = "Women" value = "Unstitched"
-                                                type = "submit" class="sf-with-ul">Unstiched</button></li>
-                                            <li style="padding:5px;"><button class = "child"  name = "Women" value = "Stitched"
-                                                type = "submit" class="sf-with-ul">Stitched</button></li>
-                                            <li style="padding:5px;"><button class = "child"  name = "Women" value = "Jeans"
-                                                type = "submit" class="sf-with-ul">Jeans</button></li>
-                                            <li style="padding:5px;"><button class = "child"  name = "Women" value = "Hoodies"
-                                                type = "submit" class="sf-with-ul">Hoodies</button></li></form>
+                                            <li style="padding:5px;"><a href="#">Unstiched</a></li>
+                                            <li style="padding:5px;"><a href="#">Stiched</a></li>
+                                            <li style="padding:5px;"><a href="#">Pret</a></li>
+                                            <li style="padding:5px;"><a href="#">Jeans</a></li>
+                                            <li style="padding:5px;"><a href="#">Hoodies</a></li>
                                         </ul>
                                     </div><!-- End .megamenu megamenu-sm -->
-                                    
                                 </li>
-                                <form style = "padding-top:14px" action="Kids-Category.php" method = "GET">
+
                                 <li>
-                                <a href=""><button class = "parent" name = "Kids" value = "Kids"
-                                    type = "submit" class="sf-with-ul" >Kids </button></a>
+                                    <a href="Kids-Category.html" class="sf-with-ul">Kids</a>
 
                                     <div class="megamenu megamenu-sm">
                                         <div class="menu-title">Products</div>
                                         <ul>
-                                            <li style="padding:5px;"><button class = "child" name = "Kids" value = "Tees"
-                                                type = "submit" class="sf-with-ul">Tees</button></li>
-                                            <li style="padding:5px;"><button class = "child"  name = "Kids" value = "Eastern"
-                                                type = "submit" class="sf-with-ul">Eastern</button></li>
-                                            <li style="padding:5px;"><button class = "child"  name = "Kids" value = "Trousers"
-                                                type = "submit" class="sf-with-ul">Trousers</button></li>
-                                            <li style="padding:5px;"><button class = "child"  name = "Kids" value = "Swaetshirts"
-                                                type = "submit" class="sf-with-ul">Sweatshirts</button></li></form>
+                                            <li style="padding:5px;"><a href="#">Tees</a></li>
+                                            <li style="padding:5px;"><a href="#">Formal Shirts</a></li>
+                                            <li style="padding:5px;"><a href="#">Trousers</a></li>
+                                            <li style="padding:5px;"><a href="#">Jeans</a></li>
+                                            <li style="padding:5px;"><a href="#">Hoodies</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -259,66 +172,10 @@ echo "<h1>Your username is: ".$_GET['fname']."123</h1>";
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <i class="icon-shopping-cart"></i>
-                                <span class="cart-count">2</span>
+                                <span class="cart-count"></span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-cart-products">
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Beige knitted elastic runner shoes</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $84.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-1.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i
-                                                class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Blue utility pinafore denim dress</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $76.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-2.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i
-                                                class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-                                </div><!-- End .cart-product -->
-
-                                <div class="dropdown-cart-total">
-                                    <span>Total</span>
-
-                                    <span class="cart-total-price">$160.00</span>
-                                </div><!-- End .dropdown-cart-total -->
-
-                                <div class="dropdown-cart-action">
-                                    <a href="cart.html" class="btn btn-primary">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i
-                                            class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdown-menu -->
+                            
                         </div><!-- End .cart-dropdown -->
                     </div><!-- End .header-right -->
                 </div><!-- End .container -->
@@ -327,35 +184,89 @@ echo "<h1>Your username is: ".$_GET['fname']."123</h1>";
 
         <main class="main">
             <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-                
-            </nav><!-- End .breadcrumb-nav -->
-            <div class="container">
-	        	<div class="page-header page-header-big text-center" style="background-image: url('Success.jpg')">
-        			<h1 class="page-title" style="color:black;margin-left: 280px;">Order Has Placed<span style="color:black;">Thank You For Shopping </span></h1>
-                    <div style="margin-left:80px;"><a href="Home.html"><span  style="color:black;">Continue Shopping &nbsp; -></span></a></div>
-	        	</div><!-- End .page-header -->
-               
-            </div><!-- End .container -->
-        </main><!-- End .main -->
-<br>
-        <main>
-            <div class="cta cta-display bg-image pt-4 pb-4"
-                style="background-image: url(assets/images/backgrounds/cta/bg-6.jpg);">
                 <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-10 col-lg-9 col-xl-8">
-                            <div class="row no-gutters flex-column flex-sm-row align-items-sm-center">
-                                <div class="col">
-                                    <h3 class="cta-title text-white">Use Promo "Summer22" To Get 10% OFF</h3><!-- End .cta-title -->
-                                    <!-- End .cta-desc -->
-                                </div><!-- End .col -->
-                            </div><!-- End .row no-gutters -->
-                        </div><!-- End .col-md-10 col-lg-9 -->
-                    </div><!-- End .row -->
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="Home.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Login</li>
+                    </ol>
                 </div><!-- End .container -->
-            </div><!-- End .cta -->
-        </main><!-- End .main -->
+            </nav><!-- End .breadcrumb-nav -->
 
+            <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('aboutus.jpg')">
+            	<div class="container">
+            		<div class="form-box">
+            			<div class="form-tab">
+	            			<ul class="nav nav-pills nav-fill" role="tablist">
+							    <li class="nav-item">
+							        <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="false">Sign In</a>
+							    </li>
+							    <li class="nav-item">
+							        <a class="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab" aria-controls="register-2" aria-selected="true">Register</a>
+							    </li>
+							</ul>
+							<div class="tab-content">
+							    <div class="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+							    	<form action="Home.php" method="post">
+							    		<div class="form-group">
+							    			<label for="singin-email-2">Username *</label>
+							    			<input type="text" class="form-control" id="singin-email-2" name="singin-email" required>
+							    		</div><!-- End .form-group -->
+
+							    		<div class="form-group">
+							    			<label for="singin-password-2">Password *</label>
+							    			<input type="password" class="form-control" id="singin-password-2" name="singin-password" required>
+							    		</div><!-- End .form-group -->
+
+							    		<div class="form-footer">
+							    			<button type="submit" class="btn btn-outline-primary-2">
+			                					<span>LOG IN</span>
+			            						<i class="icon-long-arrow-right"></i>
+			                				</button>
+
+							    		</div><!-- End .form-footer -->
+							    	</form>
+							    	
+							    </div><!-- .End .tab-pane -->
+							    <div class="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+							    	<form action="Register.php" method="post">
+                                         <div class="form-group">
+							    			<label for="register-email-2">Name *</label>
+							    			<input type="text" class="form-control" id="register-name0" name="register-name0" required>
+							    		</div><!-- End .form-group -->
+							    		<div class="form-group">
+							    			<label for="register-email-2">Username *</label>
+							    			<input type="text" class="form-control" id="register-email-2" name="register-email" required>
+							    		</div><!-- End .form-group -->
+
+							    		<div class="form-group">
+							    			<label for="register-password-2">Password *</label>
+							    			<input type="password" class="form-control" id="register-password-2" name="register-password" required>
+							    		</div><!-- End .form-group -->
+
+                                        <div class="form-group">
+							    			<label for="register-password-2">Phone *</label>
+							    			<input type="text" class="form-control" id="register-phone-2" name="register-phone" required>
+							    		</div><!-- End .form-group -->
+
+							    		<div class="form-footer">
+							    			<button type="submit" class="btn btn-outline-primary-2">
+			                					<span>SIGN UP</span>
+			            						<i class="icon-long-arrow-right"></i>
+			                				</button>
+                                            
+			                				<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+												<label class="custom-control-label" for="register-policy-2">I agree to the <a href="#">terms and conditions</a> *</label>
+											</div><!-- End .custom-checkbox -->
+							    		</div><!-- End .form-footer -->
+							    	</form>
+							    </div><!-- .End .tab-pane -->
+							</div><!-- End .tab-content -->
+						</div><!-- End .form-tab -->
+            		</div><!-- End .form-box -->
+            	</div><!-- End .container -->
+            </div><!-- End .login-page section-bg -->
+        </main><!-- End .main -->
 
         <footer class="footer footer-dark">
             <div class="footer-middle">
@@ -386,7 +297,7 @@ echo "<h1>Your username is: ".$_GET['fname']."123</h1>";
 
                                 <ul class="widget-list">
                                     <li><a href="about.html">About Store</a></li>
-                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="faq.html">FAQ</a></li>
                                     <li><a href="contact.html">Contact us</a></li>
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
@@ -431,7 +342,6 @@ echo "<h1>Your username is: ".$_GET['fname']."123</h1>";
         </footer><!-- End .footer -->
     </div><!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
-    
 
     <!-- Plugins JS File -->
     <script src="assets/js/jquery.min.js"></script>
@@ -445,5 +355,44 @@ echo "<h1>Your username is: ".$_GET['fname']."123</h1>";
 </body>
 
 
-<!-- molla/about.html  22 Nov 2019 10:03:54 GMT -->
+<!-- molla/login.html  22 Nov 2019 10:04:03 GMT -->
 </html>
+
+<?php
+ 
+
+function my()
+{
+    $servername = 'localhost:3307';
+ $username = 'root';
+ $password = '';
+ $dbname = 'store';
+ $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+ $us = $_POST['singin-email'];
+ $pass = $_POST['singin-password'];
+ $name=$_POST['register-name0'];
+ $phone=$_POST['register-phone'];
+ 
+
+ $sql = "INSERT INTO `customer`(`c_name`, `c_username`, `c_password`,`phone`) VALUES ('$name','$us','$pass','$phone');";
+ $result = mysqli_query($conn, $sql);
+
+ 
+
+    if (mysqli_num_rows($result) > 0) {
+        echo '<div style="padding: 20px;
+     background-color: green;
+     color: white;">
+     Registeration Successful!
+     </div>';
+    }
+    else{
+        echo '<div style="padding: 20px;
+     background-color: red;
+     color: white;">
+     Registeration Not Working!           
+     </div>';
+    }
+}
+?>
